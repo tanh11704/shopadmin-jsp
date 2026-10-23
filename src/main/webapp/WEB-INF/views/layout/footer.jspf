@@ -1,0 +1,8 @@
+</main>
+</div>
+<footer>
+    © ShopAdmin · v${initParam.appVersion}
+</footer>
+<script src="${ctx}/assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<nav class="sidebar">
+    <a href="${ctx}/dashboard" class="${activeMenu == 'dashboard' ? 'active' : ''}">
+        📊Tổng quan
+    </a>
+    <a href="${ctx}/products" class="${activeMenu == 'products' ? 'active' : ''}">
+        📦Sản phẩm
+    </a>
+    <a href="${ctx}/orders" class="${activeMenu == 'orders' ? 'active' : ''}">
+        🧾Đơn hàng
+    </a>
+    <c:if test="${sessionScope.currentUser.role == 'ADMIN'}">
+        <a href="${ctx}/users" class="${activeMenu == 'users' ? 'active' : ''}">
+            👥Nhân viên
+        </a>
+    </c:if>
+</nav>
+<main class="content">

@@ -1,0 +1,10 @@
+<c:if test="${not empty flashSuccess}">
+    <div class="alert success">
+        ✅<c:out value="${flashSuccess}" />
+    </div>
+</c:if>
+<c:if test="${not empty flashError}">
+    <div class="alert error">
+        ⚠️ <c:out value="${flashError}" />
+    </div>
+</c:if>

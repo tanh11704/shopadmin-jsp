@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>${empty pageTitle ? 'Shop Admin' : pageTitle}</title>
+    <link rel="stylesheet" href="${ctx}/assets/css/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <a class="logo" href="${ctx}/dashboard">🛒 ShopAdmin</a>
+        <div class="user">
+            👤 <c:out value="${sessionScope.currentUser.fullName}" />
+        </div>
+        <form method="post" action="${ctx}/logout" class="inline">
+            <button>Đăng xuất</button>
+        </form>
+    </header>
+</body>
+</html>
