@@ -3,13 +3,18 @@ package vn.shopadmin.listener;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.annotation.WebListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import vn.shopadmin.dao.CategoryDAO;
 import vn.shopadmin.util.DataSourceFactory;
 
 import javax.sql.DataSource;
-import java.util.logging.Logger;
+import java.util.List;
 
+@WebListener
 public class AppStartListener implements ServletContextListener {
-    private static final Logger log = Logger.getLogger(AppStartListener.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(AppStartListener.class.getName());
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -19,10 +24,9 @@ public class AppStartListener implements ServletContextListener {
         DataSource ds = DataSourceFactory.create();
         ctx.setAttribute("datasource", ds);
 
-//        ctx.setAttribute("categories", new CategoryDao(ds).findAllActive());
-//        ctx.setAttribute("orderStatuses", OrderStatus.values());
+        ctx.setAttribute("categories", new CategoryDAO(ds).findAllActive());
 
-//        log.info("ShopAdmin khởi động xong — {} danh mục", ((List<?>) ctx.getAttribute("categories")).size());
+        log.info("ShopAdmin khởi động xong - {} danh mục", ((List<?>) ctx.getAttribute("categories")).size());
     }
 
     @Override
@@ -33,7 +37,7 @@ public class AppStartListener implements ServletContextListener {
             try {
                 c.close();
             } catch (Exception e) {
-//                log.warning("Lỗi đóng pool", e);
+                log.warn("Lỗi đóng pool", e);
             }
         }
         log.info("ShopAdmin đã tắt, đóng connection pool");

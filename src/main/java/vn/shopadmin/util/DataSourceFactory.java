@@ -17,6 +17,7 @@ public final class DataSourceFactory {
     public static HikariDataSource create() {
         Properties p = loadProps("/db.properties");
         HikariConfig cfg = new HikariConfig();
+        cfg.setDriverClassName("org.postgresql.Driver");
         cfg.setJdbcUrl(p.getProperty("db.url"));
         cfg.setUsername(p.getProperty("db.username"));
         cfg.setPassword(p.getProperty("db.password"));
