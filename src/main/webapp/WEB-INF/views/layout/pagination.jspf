@@ -1,0 +1,47 @@
+<%--
+  pagination.jspf — thanh phân trang dùng chung.
+  Cần 2 biến trước khi include:
+    page    : record Page<T>(items, page, size, totalItems) — xem bài "Phân trang, tìm kiếm, sắp xếp"
+    baseUrl : URL đã giữ bộ lọc, KHÔNG có tham số page. Ví dụ:
+              <c:url var="baseUrl" value="/products">
+                <c:param name="q" value="${param.q}"/> <c:param name="cat" value="${param.cat}"/> ...
+              </c:url>
+  Ghi chú: Page là record nên dùng cú pháp gọi method page.page(), page.totalPages()...
+--%>
+<c:set var="cur"   value="${page.page()}"/>
+<c:set var="total" value="${page.totalPages()}"/>
+<c:set var="from"  value="${cur - 2 < 1 ? 1 : cur - 2}"/>
+<c:set var="to"    value="${cur + 2 > total ? total : cur + 2}"/>
+<c:set var="sep"   value="${fn:contains(baseUrl, '?') ? '&' : '?'}"/>
+
+<div class="sa-card-footer d-flex flex-wrap align-items-center justify-content-between gap-2">
+  <div class="small text-muted-2">
+    Hiển thị <b>${page.from()}–${page.to()}</b> / <fmt:formatNumber value="${page.totalItems()}"/> bản ghi
+  </div>
+  <c:if test="${total > 1}">
+    <nav aria-label="Phân trang">
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item ${page.hasPrev() ? '' : 'disabled'}">
+          <a class="page-link" href="${baseUrl}${sep}page=${cur - 1}" aria-label="Trang trước">‹</a>
+        </li>
+        <c:if test="${from > 1}">
+          <li class="page-item"><a class="page-link" href="${baseUrl}${sep}page=1">1</a></li>
+          <c:if test="${from > 2}"><li class="page-item disabled"><span class="page-link">…</span></li></c:if>
+        </c:if>
+        <c:forEach begin="${from}" end="${to}" var="i">
+          <c:choose>
+            <c:when test="${i == cur}"><li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li></c:when>
+            <c:otherwise><li class="page-item"><a class="page-link" href="${baseUrl}${sep}page=${i}">${i}</a></li></c:otherwise>
+          </c:choose>
+        </c:forEach>
+        <c:if test="${to < total}">
+          <c:if test="${to < total - 1}"><li class="page-item disabled"><span class="page-link">…</span></li></c:if>
+          <li class="page-item"><a class="page-link" href="${baseUrl}${sep}page=${total}">${total}</a></li>
+        </c:if>
+        <li class="page-item ${page.hasNext() ? '' : 'disabled'}">
+          <a class="page-link" href="${baseUrl}${sep}page=${cur + 1}" aria-label="Trang sau">›</a>
+        </li>
+      </ul>
+    </nav>
+  </c:if>
+</div>
