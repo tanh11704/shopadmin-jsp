@@ -1,17 +1,36 @@
-<nav class="sidebar">
-    <a href="${ctx}/dashboard" class="${activeMenu == 'dashboard' ? 'active' : ''}">
-        📊Tổng quan
-    </a>
-    <a href="${ctx}/products" class="${activeMenu == 'products' ? 'active' : ''}">
-        📦Sản phẩm
-    </a>
-    <a href="${ctx}/orders" class="${activeMenu == 'orders' ? 'active' : ''}">
-        🧾Đơn hàng
-    </a>
-    <c:if test="${sessionScope.currentUser.role == 'ADMIN'}">
-        <a href="${ctx}/users" class="${activeMenu == 'users' ? 'active' : ''}">
-            👥Nhân viên
+<c:set var="role" value="${sessionScope.currentUser.role}"/>
+<aside class="sa-sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="saSidebar" aria-labelledby="saSidebarLabel">
+  <div class="offcanvas-header border-bottom border-secondary-subtle">
+    <h5 class="offcanvas-title" id="saSidebarLabel">ShopAdmin</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#saSidebar" aria-label="Đóng"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column p-0">
+    <nav class="sa-nav nav flex-column">
+      <a class="nav-link ${activeMenu == 'dashboard' ? 'active' : ''}" href="${ctx}/dashboard"><i class="bi bi-grid-1x2"></i>Tổng quan</a>
+
+      <c:if test="${role != 'WAREHOUSE'}">
+        <div class="sa-nav-label">Bán hàng</div>
+        <a class="nav-link ${activeMenu == 'orders' ? 'active' : ''}" href="${ctx}/orders"><i class="bi bi-receipt"></i>Đơn hàng
+          <%-- newOrderCount: đặt bằng 1 Filter hoặc trong Servlet --%>
+          <c:if test="${newOrderCount > 0}"><span class="badge rounded-pill text-bg-danger">${newOrderCount}</span></c:if>
         </a>
-    </c:if>
-</nav>
-<main class="content">
+        <a class="nav-link ${activeMenu == 'order-new' ? 'active' : ''}" href="${ctx}/orders/new"><i class="bi bi-plus-square"></i>Tạo đơn</a>
+      </c:if>
+
+      <div class="sa-nav-label">Hàng hóa</div>
+      <a class="nav-link ${activeMenu == 'products' ? 'active' : ''}" href="${ctx}/products"><i class="bi bi-box-seam"></i>Sản phẩm</a>
+      <c:if test="${role == 'ADMIN' || role == 'WAREHOUSE'}">
+        <a class="nav-link ${activeMenu == 'inventory' ? 'active' : ''}" href="${ctx}/inventory"><i class="bi bi-boxes"></i>Nhập kho</a>
+      </c:if>
+
+      <c:if test="${role == 'ADMIN'}">
+        <div class="sa-nav-label">Quản trị</div>
+        <a class="nav-link ${activeMenu == 'users' ? 'active' : ''}" href="${ctx}/users"><i class="bi bi-people"></i>Nhân viên</a>
+        <a class="nav-link ${activeMenu == 'audit' ? 'active' : ''}" href="${ctx}/audit"><i class="bi bi-journal-text"></i>Nhật ký thao tác</a>
+      </c:if>
+    </nav>
+    <div class="sa-sidebar-footer mt-auto">ShopAdmin v${initParam.appVersion} · © Mộc Thời Trang</div>
+  </div>
+</aside>
+
+<main class="sa-main">
