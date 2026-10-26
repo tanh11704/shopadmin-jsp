@@ -1,4 +1,4 @@
-package vn.shopadmin.util;
+package vn.shopadmin.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

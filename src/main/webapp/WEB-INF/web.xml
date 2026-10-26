@@ -12,6 +12,10 @@
       <scripting-invalid>true</scripting-invalid>
       <include-prelude>/WEB-INF/views/layout/taglibs.jspf</include-prelude>
     </jsp-property-group>
+    <jsp-property-group>
+      <url-pattern>*.jspf</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
   </jsp-config>
   <session-config>
     <session-timeout>30</session-timeout>

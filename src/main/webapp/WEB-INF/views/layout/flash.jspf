@@ -1,14 +1,15 @@
+<%@ page pageEncoding="UTF-8" %>
 <c:if test="${not empty flashSuccess}">
-  <div class="alert alert-success alert-dismissible fade show js-autohide d-flex align-items-center gap-2" role="alert">
-    <i class="bi bi-check-circle-fill"></i>
-    <div><c:out value="${flashSuccess}"/></div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
-  </div>
+    <div class="alert alert-success alert-dismissible fade show js-autohide d-flex align-items-center gap-2" role="alert">
+        <i class="bi bi-check-circle-fill"></i>
+        <div><c:out value="${flashSuccess}"/></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+    </div>
 </c:if>
 <c:if test="${not empty flashError}">
-  <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center gap-2" role="alert">
-    <i class="bi bi-exclamation-triangle-fill"></i>
-    <div><c:out value="${flashError}"/></div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
-  </div>
+    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center gap-2" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <div><c:out value="${flashError}"/></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+    </div>
 </c:if>

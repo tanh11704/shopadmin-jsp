@@ -1,13 +1,4 @@
-<%--
-  pagination.jspf — thanh phân trang dùng chung.
-  Cần 2 biến trước khi include:
-    page    : record Page<T>(items, page, size, totalItems) — xem bài "Phân trang, tìm kiếm, sắp xếp"
-    baseUrl : URL đã giữ bộ lọc, KHÔNG có tham số page. Ví dụ:
-              <c:url var="baseUrl" value="/products">
-                <c:param name="q" value="${param.q}"/> <c:param name="cat" value="${param.cat}"/> ...
-              </c:url>
-  Ghi chú: Page là record nên dùng cú pháp gọi method page.page(), page.totalPages()...
---%>
+<%@ page pageEncoding="UTF-8" %>
 <c:set var="cur"   value="${page.page()}"/>
 <c:set var="total" value="${page.totalPages()}"/>
 <c:set var="from"  value="${cur - 2 < 1 ? 1 : cur - 2}"/>

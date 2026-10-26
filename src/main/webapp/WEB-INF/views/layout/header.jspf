@@ -1,72 +1,73 @@
+<%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi" data-bs-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><c:out value="${empty pageTitle ? 'ShopAdmin' : pageTitle}"/> · ShopAdmin</title>
-  <link rel="icon" href="${ctx}/assets/img/favicon.svg" type="image/svg+xml">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><c:out value="${empty pageTitle ? 'ShopAdmin' : pageTitle}"/> · ShopAdmin</title>
+    <link rel="icon" href="${ctx}/assets/img/favicon.svg" type="image/svg+xml">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <link rel="stylesheet" href="${ctx}/assets/css/app.css">
+    <link rel="stylesheet" href="${ctx}/assets/css/style.css?v=5cd659622abe">
 </head>
 <body class="sa-body">
 
 <c:set var="me" value="${sessionScope.currentUser}"/>
 <header class="sa-topbar">
-  <button class="sa-icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#saSidebar" aria-controls="saSidebar" aria-label="Mở menu">
-    <i class="bi bi-list fs-4"></i>
-  </button>
-  <a class="sa-brand" href="${ctx}/dashboard">
-    <span class="sa-brand-logo"><i class="bi bi-bag-heart"></i></span>
-    <span>ShopAdmin<small>Mộc Thời Trang</small></span>
-  </a>
-
-  <form class="sa-topbar-search flex-grow-1 d-none d-md-block" action="${ctx}/orders" method="get" role="search">
-    <div class="input-group input-group-sm">
-      <span class="input-group-text bg-transparent"><i class="bi bi-search"></i></span>
-      <input class="form-control" type="search" name="q" placeholder="Tìm mã đơn, SĐT khách hàng…" aria-label="Tìm kiếm">
-    </div>
-  </form>
-
-  <div class="ms-auto d-flex align-items-center gap-1">
-    <button class="sa-icon-btn" type="button" data-theme-toggle data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sáng / Tối">
-      <i class="bi bi-moon-stars"></i>
+    <button class="sa-icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#saSidebar" aria-controls="saSidebar" aria-label="Mở menu">
+        <i class="bi bi-list fs-4"></i>
     </button>
+    <a class="sa-brand" href="${ctx}/dashboard">
+        <span class="sa-brand-logo"><i class="bi bi-bag-heart"></i></span>
+        <span>ShopAdmin<small>Mộc Thời Trang</small></span>
+    </a>
 
-    <div class="dropdown">
-      <button class="btn btn-link text-reset text-decoration-none d-flex align-items-center gap-2 px-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="sa-avatar">${fn:toUpperCase(fn:substring(me.username, 0, 2))}</span>
-        <span class="d-none d-sm-block text-start lh-sm">
+    <form class="sa-topbar-search flex-grow-1 d-none d-md-block" action="${ctx}/orders" method="get" role="search">
+        <div class="input-group input-group-sm">
+            <span class="input-group-text bg-transparent"><i class="bi bi-search"></i></span>
+            <input class="form-control" type="search" name="q" placeholder="Tìm mã đơn, SĐT khách hàng…" aria-label="Tìm kiếm">
+        </div>
+    </form>
+
+    <div class="ms-auto d-flex align-items-center gap-1">
+        <button class="sa-icon-btn" type="button" data-theme-toggle data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sáng / Tối">
+            <i class="bi bi-moon-stars"></i>
+        </button>
+
+        <div class="dropdown">
+            <button class="btn btn-link text-reset text-decoration-none d-flex align-items-center gap-2 px-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="sa-avatar">${fn:toUpperCase(fn:substring(me.username, 0, 2))}</span>
+                <span class="d-none d-sm-block text-start lh-sm">
           <span class="d-block fw-medium small"><c:out value="${me.fullName}"/></span>
           <span class="d-block text-muted-2" style="font-size:.72rem">
             <c:choose>
-              <c:when test="${me.role == 'ADMIN'}">Quản trị</c:when>
-              <c:when test="${me.role == 'MANAGER'}">Quản lý</c:when>
-              <c:when test="${me.role == 'WAREHOUSE'}">Thủ kho</c:when>
-              <c:otherwise>Bán hàng</c:otherwise>
+                <c:when test="${me.role == 'ADMIN'}">Quản trị</c:when>
+                <c:when test="${me.role == 'MANAGER'}">Quản lý</c:when>
+                <c:when test="${me.role == 'WAREHOUSE'}">Thủ kho</c:when>
+                <c:otherwise>Bán hàng</c:otherwise>
             </c:choose>
           </span>
         </span>
-        <i class="bi bi-chevron-down small text-muted-2"></i>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow">
-        <li><a class="dropdown-item" href="${ctx}/change-password"><i class="bi bi-key me-2"></i>Đổi mật khẩu</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li>
-          <form method="post" action="${ctx}/logout">
-            <input type="hidden" name="_csrf" value="${sessionScope.csrfToken}">
-            <button class="dropdown-item text-danger" type="submit"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</button>
-          </form>
-        </li>
-      </ul>
+                <i class="bi bi-chevron-down small text-muted-2"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow">
+                <li><a class="dropdown-item" href="${ctx}/change-password"><i class="bi bi-key me-2"></i>Đổi mật khẩu</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form method="post" action="${ctx}/logout">
+                        <input type="hidden" name="_csrf" value="${sessionScope.csrfToken}">
+                        <button class="dropdown-item text-danger" type="submit"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </header>
 
 <div class="sa-layout">

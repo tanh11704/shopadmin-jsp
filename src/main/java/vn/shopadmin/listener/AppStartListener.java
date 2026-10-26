@@ -6,8 +6,9 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vn.shopadmin.config.AppContext;
+import vn.shopadmin.config.DataSourceFactory;
 import vn.shopadmin.dao.CategoryDAO;
-import vn.shopadmin.util.DataSourceFactory;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -23,8 +24,10 @@ public class AppStartListener implements ServletContextListener {
         // Connetion Pool
         DataSource ds = DataSourceFactory.create();
         ctx.setAttribute("datasource", ds);
+        AppContext.init(ds);
 
         ctx.setAttribute("categories", new CategoryDAO(ds).findAllActive());
+
 
         log.info("ShopAdmin khởi động xong - {} danh mục", ((List<?>) ctx.getAttribute("categories")).size());
     }

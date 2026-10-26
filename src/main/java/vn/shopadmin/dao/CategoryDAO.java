@@ -38,7 +38,7 @@ public class CategoryDAO {
 
     private Category map(ResultSet rs) throws SQLException {
         Category c = new Category();
-        c.setId(rs.getLong("id"));
+        c.setId(rs.getInt("id"));
         c.setName(rs.getString("name"));
         c.setActive(rs.getBoolean("active"));
         return c;
