@@ -1,9 +1,11 @@
 package vn.shopadmin.filter;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 
+@WebFilter(urlPatterns = "/*")
 public class EncodingFilter implements Filter {
 
     @Override
